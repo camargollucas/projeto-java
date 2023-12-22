@@ -1,10 +1,10 @@
 package projetojava;
 
-public class Camiseta {
+abstract class Produto {
 	private String tipo;
 	private double preco;
 
-	public Camiseta(String tipo, double preco) {
+	public Produto(String tipo, double preco) {
 		this.tipo = tipo;
 		this.preco = preco;
 	}
@@ -13,15 +13,14 @@ public class Camiseta {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
 	public double getPreco() {
 		return preco;
 	}
+}
 
-	public void setPreco(double preco) {
-		this.preco = preco;
+public class Camiseta extends Produto {
+
+	public Camiseta(String tipo, double preco) {
+		super(tipo, preco);
 	}
 }
