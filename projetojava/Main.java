@@ -1,33 +1,37 @@
 package projetojava;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
-		Camiseta camiseta1 = new Camiseta("Manga Curta", 10.00);
-		Camiseta camiseta2 = new Camiseta("Manga longa", 20.00);
-		Camiseta camiseta3 = new Camiseta("Xadrez", 30.00);
-
 		List<Carrinho> carrinhoDeCompras = new ArrayList<Carrinho>();
 
 		Scanner leia = new Scanner(System.in);
 		int opcao, qtde;
 
 		do {
-			System.out.println("		BRECHÓ	GEN\r\n" + "\r\n" + "Item		Camiseta		Valor\r\n"
-					+ "1.		Manga curta		R$ 10,00\r\n" + "2.		Manga longa		R$ 20,00\r\n"
-					+ "3.		Xadrez			R$ 30,00\r\n" + "0. 		Sair");
-			System.out.println("Escolha uma opção:");
-			opcao = leia.nextInt();
+			try {
+				System.out.println("		BRECHÓ	GEN\r\n" + "\r\n" + "Item		Camiseta		Valor\r\n"
+						+ "1.		Manga curta		R$ 10,00\r\n" + "2.		Manga longa		R$ 20,00\r\n"
+						+ "3.		Xadrez			R$ 30,00\r\n" + "0. 		Sair");
+				System.out.println("Escolha uma opção:");
+				opcao = leia.nextInt();
 
-			if (opcao >= 1 && opcao <= 3) {
-				System.out.println("Digite a quantidade desejada:");
-				qtde = leia.nextInt();
-				adicionarAoCarrinho(carrinhoDeCompras, opcao, qtde);
-			} else if (opcao != 0) {
-				System.out.println("Opção inválida. Tente novamente.");
+				if (opcao >= 1 && opcao <= 3) {
+					System.out.println("Digite a quantidade desejada:");
+					qtde = leia.nextInt();
+					adicionarAoCarrinho(carrinhoDeCompras, opcao, qtde);
+
+				} else if (opcao != 0) {
+					System.out.println("Opção inválida. Tente novamente.");
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("Erro: Insira um número inteiro.");
+				leia.nextLine();
+				opcao = -1;
 			}
 
 		} while (opcao != 0);
@@ -67,6 +71,5 @@ public class Main {
 			System.out.println("Valor Total: R$ " + item.getTotal());
 			System.out.println("----------------------------------");
 		}
-
 	}
 }
